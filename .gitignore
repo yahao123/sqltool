@@ -1,0 +1,54 @@
+# maven ignore
+target/
+logs/
+*.jar
+*.war
+*.zip
+*.tar
+*.tar.gz
+*.iml
+
+# eclipse ignore
+.settings/
+.project
+.classpath
+
+# idea ignore
+.idea/
+*.ipr
+*.iml
+*.iws
+
+# temp ignore
+*.log
+*.log.lck
+*.cache
+*.diff
+*.patch
+*.tmp
+*.java~
+*.properties~
+*.xml~
+*/src/main/profiles/local/
+*/src/main/resources/rebel.xml
+*/src/main/resources/application-local.yml
+/upload
+
+*.class
+.mtj.tmp/
+*.jar
+!/project-maven-repo/**/*.jar
+*.war
+hs_err_pid*
+## File-based project format:
+*.ipr
+*.iws
+.svn/
+.webstorm/
+
+# system ignore
+.DS_Store
+Thumbs.db
+/cos-abnormal/abnormal-server/src/profiles/local/
+/demo/demo-server/src/profiles/local/
+/cos-riseflow/riseflow-server/src/profiles/local/
