@@ -4,7 +4,6 @@ import java.awt.LayoutManager;
 import java.awt.TextArea;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.ClipboardOwner;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
 import java.awt.event.ActionEvent;
@@ -18,47 +17,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
-import java.awt.*;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.StringSelection;
-import java.awt.datatransfer.Transferable;
-import java.awt.event.ActionEvent;
-
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.swing.*;
-
-import java.awt.*;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.StringSelection;
-import java.awt.datatransfer.Transferable;
-import java.awt.event.ActionEvent;
-
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.swing.*;
 
 public class Main extends JFrame implements ActionListener {
     /**
@@ -67,45 +27,33 @@ public class Main extends JFrame implements ActionListener {
     private static Pattern PARAM_PATTERN = Pattern.compile("\\?");
 
     private JPanel jp = new JPanel();
-    private JLabel[] jlArray = new JLabel[]{new JLabel("SQL"), new JLabel("字段值"), new JLabel("结果"), new JLabel("")};
     private JButton[] jbArray = new JButton[]{new JButton("执行"), new JButton("清空"), new JButton("复制")};
     private JTextField jtxtSql = new JTextField();
     private JTextField JTextValue = new JTextField();
 
     TextArea resultSQL = new TextArea("", 20, 43, 1);
 
+
     public Main() {
         this.jp.setLayout((LayoutManager) null);
 
+        // 初始化按钮
         int i;
-        for (i = 0; i < 3; ++i) {
-            this.jlArray[i].setBounds(30, 20 + i * 50, 80, 26);
-            this.jbArray[i].setBounds(120 + i * 110, 660, 80, 26);
-            this.jp.add(this.jlArray[i]);
+        for (i = 0; i < jbArray.length; ++i) {
+            // 设置按钮位置和大小
+            this.jbArray[i].setBounds(30 + i * 110, 500, 80, 26);
             this.jp.add(this.jbArray[i]);
             this.jbArray[i].addActionListener(this);
         }
-
-        for (i = 2; i < 4; ++i) {
-            this.jlArray[i].setBounds(30, 20 + i * 50, 80, 26);
-            this.jp.add(this.jlArray[i]);
-        }
-
-        this.jtxtSql.setBounds(115, 20, 500, 30);
-        this.jp.add(this.jtxtSql);
-        this.jtxtSql.addActionListener(this);
-        this.JTextValue.setBounds(115, 70, 500, 30);
-        this.jp.add(this.JTextValue);
-        this.JTextValue.addActionListener(this);
-        this.resultSQL.setBounds(115, 120, 500, 500);
+        // 设置文本框位置和大小
+        this.resultSQL.setBounds(30, 20, 530, 450);
         this.jp.add(this.resultSQL);
-        this.jlArray[3].setBounds(10, 250, 700, 30);
-        this.jp.add(this.jlArray[3]);
         this.add(this.jp);
         this.setDefaultCloseOperation(3);
-        this.setTitle("小马哥工具2.1版");
+        this.setTitle("MyBatis-SQL-TOOL");
         this.setResizable(false);
-        this.setBounds(100, 230, 700, 800);
+        // 设置整个页面的大小
+        this.setBounds(100, 230, 600, 600);
         this.setVisible(true);
     }
 
@@ -161,7 +109,7 @@ public class Main extends JFrame implements ActionListener {
             }
         } else if (e.getSource() == this.jbArray[1]) {
             //清空操作
-            this.jlArray[2].setText("结果");
+            // this.jlArray[2].setText("结果");
             this.jtxtSql.setText("");
             this.JTextValue.setText("");
             this.resultSQL.setText("");
@@ -172,7 +120,6 @@ public class Main extends JFrame implements ActionListener {
             Transferable tText = new StringSelection(this.resultSQL.getText());
             clip.setContents(tText, null);
         }
-
     }
 
     public static void main(String[] args) {
@@ -240,4 +187,6 @@ public class Main extends JFrame implements ActionListener {
         context = context.replaceAll(pattern, "");
         return context;
     }
+
+
 }
